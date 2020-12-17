@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  barotrauma:
+    image: mygamingaccount/barotrauma_ds
+    tty: true
+    stdin_open: true
+    ports:
+      - "27015:27015/udp"
+      - "27016:27016/udp"
+    volumes:
+      - barotrauma:/home/steam/bds
+      - steamcmd:/home/steam/steamcmd
+      - ./Subs:/home/steam/bds/Submarines/Downloaded
+      - ./Saves:/home/steam/bds/Daedalic Entertainment GmbH/Barotrauma/Multiplayer
+      - type: bind
+        source: ./bannedplayers.txt
+        target: /home/steam/bds/Data/bannedplayers.txt
+      - type: bind
+        source: ./serversettings.xml
+        target: /home/steam/bds/serversettings.xml
+      - type: bind
+        source: ./clientpermissions.xml
+        target: /home/steam/bds/Data/clientpermissions.xml
+
+volumes:
+  barotrauma:
+  steamcmd:
